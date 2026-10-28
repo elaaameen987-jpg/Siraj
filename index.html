@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>سِراج - الدردشة الذكية</title>
-    <!-- استيراد خط تجوال العربي العصري -->
+    <title>شات فرفشة صحاب - دردشة عربية</title>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -14,156 +13,304 @@
             font-family: 'Tajawal', sans-serif;
         }
         body {
-            background-color: #f0f2f5;
+            background-color: #eef2f7;
             height: 100vh;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
         }
-        .chat-container {
+        .main-container {
             width: 100%;
-            max-width: 600px;
+            max-width: 900px;
             height: 100%;
-            max-height: 85vh;
+            max-height: 90vh;
             background: #ffffff;
-            border-radius: 16px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             display: flex;
             flex-direction: column;
             overflow: hidden;
+            border: 2px solid #ff4757;
         }
+        /* الهيدر أو الشريط العلوي يشبه مواقع الشات العربية الشهيرة */
         .chat-header {
-            background: #4f46e5;
+            background: linear-gradient(135deg, #ff4757, #ff6b81);
             color: #ffffff;
-            padding: 20px;
-            text-align: center;
-            font-size: 22px;
-            font-weight: 700;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.15);
         }
-        .chat-messages {
+        .chat-header h1 {
+            font-size: 20px;
+            font-weight: 700;
+        }
+        .user-badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+        
+        /* محتوى الشات وقائمة المتواجدين */
+        .chat-body {
+            display: flex;
             flex: 1;
-            padding: 20px;
+            overflow: hidden;
+        }
+        .chat-messages-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: #f9f9f9;
+        }
+        .messages-list {
+            flex: 1;
+            padding: 15px;
             overflow-y: auto;
             display: flex;
             flex-direction: column;
-            gap: 15px;
-            background: #f8fafc;
+            gap: 12px;
         }
-        .message {
-            max-width: 75%;
-            padding: 12px 16px;
-            border-radius: 12px;
-            font-size: 15px;
-            line-height: 1.5;
-            word-wrap: break-word;
+        .message-item {
+            background: #fff;
+            padding: 10px 14px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            max-width: 80%;
+            line-height: 1.4;
+            font-size: 14px;
         }
-        .message.bot {
-            background: #ffffff;
-            color: #1e293b;
-            align-self: flex-start;
-            border: 1px solid #e2e8f0;
-            border-top-right-radius: 2px;
+        .message-item .sender-name {
+            font-weight: 700;
+            color: #ff4757;
+            margin-bottom: 3px;
+            font-size: 13px;
         }
-        .message.user {
-            background: #4f46e5;
-            color: #ffffff;
-            align-self: flex-end;
-            border-top-left-radius: 2px;
-        }
-        .chat-input-area {
+        
+        /* قائمة المتواجدين على الجانب */
+        .sidebar-users {
+            width: 220px;
+            background: #fff5f5;
+            border-right: 1px solid #ffd3d3;
             padding: 15px;
+            display: flex;
+            flex-direction: column;
+        }
+        .sidebar-users h3 {
+            font-size: 15px;
+            color: #d63031;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #ff7675;
+            padding-bottom: 5px;
+        }
+        .user-list-item {
+            font-size: 14px;
+            padding: 6px 0;
+            color: #2d3436;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .online-dot {
+            width: 8px;
+            height: 8px;
+            background: #2ed573;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        /* خانة كتابة الرسالة */
+        .chat-input-box {
+            padding: 12px;
             background: #ffffff;
-            border-top: 1px solid #e2e8f0;
+            border-top: 1px solid #ddd;
             display: flex;
             gap: 10px;
         }
-        .chat-input-area input {
+        .chat-input-box input {
             flex: 1;
-            padding: 12px 16px;
-            border: 1px solid #cbd5e1;
-            border-radius: 8px;
+            padding: 10px 14px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
             outline: none;
-            font-size: 15px;
-            transition: border-color 0.2s;
+            font-size: 14px;
         }
-        .chat-input-area input:focus {
-            border-color: #4f46e5;
+        .chat-input-box input:focus {
+            border-color: #ff4757;
         }
-        .chat-input-area button {
-            background: #4f46e5;
-            color: #ffffff;
+        .chat-input-box button {
+            background: #ff4757;
+            color: white;
             border: none;
             padding: 0 20px;
-            border-radius: 8px;
-            font-size: 16px;
+            border-radius: 6px;
             font-weight: 600;
             cursor: pointer;
             transition: background 0.2s;
         }
-        .chat-input-area button:hover {
-            background: #4338ca;
+        .chat-input-box button:hover {
+            background: #e84118;
         }
-        @media (max-width: 600px) {
-            .chat-container {
+
+        /* شاشة تسجيل الدخول السريعة بالاسم */
+        #loginOverlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+        }
+        .login-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            width: 90%;
+            max-width: 350px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+        .login-card h2 {
+            color: #ff4757;
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+        .login-card input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            text-align: center;
+            font-size: 15px;
+            outline: none;
+        }
+        .login-card button {
+            width: 100%;
+            background: #ff4757;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 700px) {
+            .sidebar-users {
+                display: none; /* إخفاء القائمة بالهواتف لتوسيع الشات */
+            }
+            .main-container {
                 height: 100vh;
                 max-height: 100vh;
                 border-radius: 0;
+                border: none;
             }
         }
     </style>
 </head>
 <body>
 
-    <div class="chat-container">
+    <!-- نافذة الدخول باسم مستعار -->
+    <div id="loginOverlay">
+        <div class="login-card">
+            <h2>شات فرفشة صحاب</h2>
+            <p style="margin-bottom: 15px; color: #666; font-size: 14px;">أدخل اسمك المستعار للبدء بالدردشة:</p>
+            <input type="text" id="nicknameInput" placeholder="اكتب اسمك هنا..." autocomplete="off">
+            <button id="startChatBtn">دخول الشات</button>
+        </div>
+    </div>
+
+    <!-- حاوية الشات الرئيسية -->
+    <div class="main-container">
         <div class="chat-header">
-            🌙 سِراج - منصة المحادثة الذكية
+            <h1>🌸 شات فرفشة صحاب - الغرفة العامة</h1>
+            <div class="user-badge" id="displayUser">زائر</div>
         </div>
         
-        <div class="chat-messages" id="chatMessages">
-            <div class="message bot">
-                أهلاً بكِ! أنا مساعدكِ <strong>سراج</strong>. كيف يمكنني مساعدتكِ اليوم؟
-            </div>
-        </div>
+        <div class="chat-body">
+            <!-- رسائل الشات -->
+            <div class="chat-messages-area">
+                <div class="messages-list" id="messagesList">
+                    <div class="message-item">
+                        <div class="sender-name">إدارة فرفشة</div>
+                        أهلاً بكم جميعاً في شات فرفشة صحاب! نرجو الالتزام بقوانين الدردشة والاستمتاع بالوقث. ✨
+                    </div>
+                </div>
 
-        <div class="chat-input-area">
-            <input type="text" id="userInput" placeholder="اكتب رسالتك هنا..." autocomplete="off">
-            <button id="sendBtn">إرسال</button>
+                <div class="chat-input-box">
+                    <input type="text" id="messageInput" placeholder="اكتب رسالتك العامة هنا..." autocomplete="off">
+                    <button id="sendBtn">إرسال</button>
+                </div>
+            </div>
+
+            <!-- قائمة المتواجدين الجانبية -->
+            <div class="sidebar-users">
+                <h3>المتواجدون (4)</h3>
+                <div class="user-list-item"><span class="online-dot"></span> سراج البوت</div>
+                <div class="user-list-item"><span class="online-dot"></span> فرفوشة</div>
+                <div class="user-list-item"><span class="online-dot"></span> صقر العرب</div>
+                <div class="user-list-item"><span class="online-dot"></span> أميرة الورد</div>
+            </div>
         </div>
     </div>
 
     <script>
-        const messagesContainer = document.getElementById('chatMessages');
-        const userInput = document.getElementById('userInput');
+        const loginOverlay = document.getElementById('loginOverlay');
+        const nicknameInput = document.getElementById('nicknameInput');
+        const startChatBtn = document.getElementById('startChatBtn');
+        const displayUser = document.getElementById('displayUser');
+        
+        const messagesList = document.getElementById('messagesList');
+        const messageInput = document.getElementById('messageInput');
         const sendBtn = document.getElementById('sendBtn');
 
-        function addMessage(text, sender) {
-            const messageDiv = document.createElement('div');
-            messageDiv.classList.add('message', sender);
-            messageDiv.textContent = text;
-            messagesContainer.appendChild(messageDiv);
-            messagesContainer.scrollTop = messagesContainer.scrollHeight;
-        }
+        let currentUsername = "زائر";
 
-        function handleSend() {
-            const text = userInput.value.trim();
-            if (text === "") return;
-
-            addMessage(text, 'user');
-            userInput.value = "";
-
-            // محاكاة رد ذكي من سراج
-            setTimeout(() => {
-                addMessage("أهلاً بكِ مجدداً! لقد تلقيت رسالتك بنجاح وأنا جاهز لخدمتك.", 'bot');
-            }, 1000);
-        }
-
-        sendBtn.addEventListener('click', handleSend);
-        userInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                handleSend();
+        startChatBtn.addEventListener('click', () => {
+            const name = nicknameInput.value.trim();
+            if(name !== "") {
+                currentUsername = name;
+                displayUser.textContent = currentUsername;
+                loginOverlay.style.display = 'none';
+            } else {
+                alert("الرجاء إدخال اسم مستعار صحيح!");
             }
+        });
+
+        function sendMsg() {
+            const text = messageInput.value.trim();
+            if(text === "") return;
+
+            // إضافة رسالة المستخدم
+            const msgDiv = document.createElement('div');
+            msgDiv.classList.add('message-item');
+            msgDiv.innerHTML = `<div class="sender-name" style="color: #0984e3;">${currentUsername}</div>${text}`;
+            messagesList.appendChild(msgDiv);
+            
+            messageInput.value = "";
+            messagesList.scrollTop = messagesList.scrollHeight;
+
+            // محاكاة تفاعل من شخص آخر في الشات بعد ثانية
+            setTimeout(() => {
+                const botMsg = document.createElement('div');
+                botMsg.classList.add('message-item');
+                botMsg.innerHTML = `<div class="sender-name">فرفوشة</div>منور يا ${currentusername}! كيف حالك اليوم؟ 😊`;
+                messagesList.appendChild(botMsg);
+                messagesList.scrollTop = messagesList.scrollHeight;
+            }, 1200);
+        }
+
+        sendBtn.addEventListener('click', sendMsg);
+        messageInput.addEventListener('keypress', (e) => {
+            if(e.key === 'Enter') sendMsg();
         });
     </script>
 
