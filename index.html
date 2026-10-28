@@ -1,0 +1,388 @@
+<!DOCTYPE html>  <html lang="ar" dir="rtl">  
+<head>  
+<meta charset="UTF-8">  
+<meta name="viewport" content="width=device-width, initial-scale=1.0">  
+<title>سِراج | SIRAJ</title>  <style>  
+* { box-sizing: border-box; }  
+  
+body {  
+  margin: 0;  
+  min-height: 100vh;  
+  background: #1b1230;  
+  color: #fff;  
+  font-family: Tahoma, Arial, sans-serif;  
+}  
+  
+header {  
+  text-align: center;  
+  padding: 26px 12px;  
+  background: #2c1b47;  
+  border-bottom: 1px solid #59436d;  
+}  
+  
+header h1 {  
+  color: #e8c779;  
+  margin: 0 0 10px;  
+  font-size: 29px;  
+}  
+  
+header p {  
+  color: #e1d6ed;  
+  margin: 0;  
+  font-size: 14px;  
+}  
+  
+main {  
+  max-width: 650px;  
+  margin: 24px auto;  
+  padding: 0 14px;  
+}  
+  
+.panel {  
+  background: #291d3d;  
+  border: 1px solid #49345f;  
+  border-radius: 18px;  
+  padding: 22px;  
+  box-shadow: 0 8px 28px #10091b55;  
+}  
+  
+h2 {  
+  color: #e8c779;  
+  margin-top: 0;  
+}  
+  
+label {  
+  display: block;  
+  margin: 14px 0 8px;  
+}  
+  
+input, button {  
+  font: inherit;  
+  border-radius: 10px;  
+  padding: 13px;  
+}  
+  
+input {  
+  width: 100%;  
+  background: #1b1230;  
+  color: white;  
+  border: 1px solid #59436d;  
+  outline: none;  
+}  
+  
+input:focus {  
+  border-color: #e8c779;  
+}  
+  
+button {  
+  border: 0;  
+  background: #e8c779;  
+  color: #241633;  
+  font-weight: bold;  
+  cursor: pointer;  
+}  
+  
+button:disabled {  
+  opacity: .55;  
+  cursor: not-allowed;  
+}  
+  
+.primary {  
+  width: 100%;  
+  margin-top: 16px;  
+}  
+  
+#status {  
+  color: #d9cce8;  
+  font-size: 13px;  
+  line-height: 1.8;  
+  margin-top: 12px;  
+}  
+  
+.room-title {  
+  color: #e8c779;  
+  margin-bottom: 5px;  
+}  
+  
+#messages {  
+  height: 340px;  
+  overflow-y: auto;  
+  background: #1b1230;  
+  border: 1px solid #49345f;  
+  border-radius: 13px;  
+  padding: 12px;  
+  margin: 18px 0;  
+}  
+  
+.message {  
+  background: #352449;  
+  border: 1px solid #49345f;  
+  border-radius: 12px;  
+  padding: 11px;  
+  margin-bottom: 10px;  
+  overflow-wrap: anywhere;  
+}  
+  
+.message-head {  
+  display: flex;  
+  justify-content: space-between;  
+  gap: 8px;  
+  margin-bottom: 7px;  
+}  
+  
+.sender {  
+  color: #e8c779;  
+  font-weight: bold;  
+}  
+  
+.time {  
+  color: #c4b4d3;  
+  font-size: 11px;  
+}  
+  
+.message-text {  
+  white-space: pre-wrap;  
+  line-height: 1.7;  
+}  
+  
+#chatForm {  
+  display: flex;  
+  gap: 8px;  
+}  
+  
+#chatForm input {  
+  flex: 1;  
+  min-width: 0;  
+}  
+  
+#chatForm button {  
+  padding-inline: 18px;  
+}  
+  
+.note {  
+  color: #c4b4d3;  
+  font-size: 12px;  
+  line-height: 1.8;  
+  margin-top: 14px;  
+}  
+  
+footer {  
+  text-align: center;  
+  color: #b6a3ca;  
+  font-size: 12px;  
+  padding: 20px;  
+}  
+  
+[hidden] { display: none !important; }  
+</style>  </head>  <body>  
+<header>  
+  <h1>✦ سِراج | SIRAJ ✦</h1>  
+  <p>مساحتك، حكايتك، وعالمك.</p>  
+</header>  <main>  
+  <section class="panel" id="welcome">  
+    <h2>أهلًا بك في سِراج 🌙</h2>  
+    <p>اختر اسمًا مستعارًا وابدأ السوالف.</p>  <label for="nickname">اسمك المستعار</label>  
+<input id="nickname" maxlength="24"  
+  placeholder="مثال: نجمة الليل" autocomplete="off">  
+
+<button class="primary" id="enterButton" disabled>  
+  جارٍ الاتصال...  
+</button>  
+
+<p id="status">جارٍ الاتصال بقاعدة البيانات...</p>  
+<p class="note">  
+  استخدم اسمًا مستعارًا ولا تشارك معلوماتك الشخصية في الدردشة.  
+</p>
+
+  </section>    <section class="panel" id="chat" hidden>  
+    <h2 class="room-title">🌙 غرفة السوالف</h2>  
+    <p id="welcomeName"></p>  
+    <div id="messages" aria-live="polite"></div>  <form id="chatForm">  
+  <input id="messageInput" maxlength="1000"  
+    placeholder="اكتب رسالتك..." autocomplete="off" required>  
+  <button id="sendButton" type="submit">إرسال</button>  
+</form>  
+
+<p id="chatStatus" class="note">  
+  الرسائل تظهر هنا عند الاتصال بنجاح.  
+</p>  
+<button id="backButton" type="button"  
+  style="margin-top:12px">تغيير الاسم</button>
+
+  </section>  
+</main>  <footer>سِراج | SIRAJ — مساحة للسوالف باحترام 💜</footer>  <script type="module">  
+import { initializeApp } from  
+  "https://www.gstatic.com/firebasejs/13.1.0/firebase-app.js";  
+  
+import { getAuth, signInAnonymously } from  
+  "https://www.gstatic.com/firebasejs/13.1.0/firebase-auth.js";  
+  
+import {  
+  getFirestore, collection, addDoc, serverTimestamp,  
+  query, orderBy, onSnapshot  
+} from "https://www.gstatic.com/firebasejs/13.1.0/firebase-firestore.js";  
+  
+// إعدادات تطبيق سِراج من Firebase  
+const firebaseConfig = {  
+  apiKey: "AIzaSyDQUWD0Rq3QkMRvZ0NwbkM9ifKG8hH7tTA",  
+  authDomain: "siraj-7c46f.firebaseapp.com",  
+  projectId: "siraj-7c46f",  
+  storageBucket: "siraj-7c46f.firebasestorage.app",  
+  messagingSenderId: "959478086475",  
+  appId: "1:959478086475:web:7a1f1d6467e991213c06ce"  
+};  
+  
+const app = initializeApp(firebaseConfig);  
+const auth = getAuth(app);  
+const db = getFirestore(app);  
+  
+const welcome = document.getElementById("welcome");  
+const chat = document.getElementById("chat");  
+const nicknameInput = document.getElementById("nickname");  
+const enterButton = document.getElementById("enterButton");  
+const status = document.getElementById("status");  
+const welcomeName = document.getElementById("welcomeName");  
+const messages = document.getElementById("messages");  
+const chatForm = document.getElementById("chatForm");  
+const messageInput = document.getElementById("messageInput");  
+const sendButton = document.getElementById("sendButton");  
+const chatStatus = document.getElementById("chatStatus");  
+const backButton = document.getElementById("backButton");  
+  
+let currentNickname = "";  
+let connected = false;  
+let stopListening = null;  
+  
+function showStatus(message) {  
+  status.textContent = message;  
+}  
+  
+function showChatStatus(message) {  
+  chatStatus.textContent = message;  
+}  
+  
+function displayMessages(snapshot) {  
+  messages.replaceChildren();  
+  
+  snapshot.forEach((item) => {  
+    const data = item.data();  
+  
+    const card = document.createElement("div");  
+    card.className = "message";  
+  
+    const head = document.createElement("div");  
+    head.className = "message-head";  
+  
+    const sender = document.createElement("span");  
+    sender.className = "sender";  
+    sender.textContent = data.sender || "مستخدم";  
+  
+    const time = document.createElement("span");  
+    time.className = "time";  
+  
+    if (data.createdAt && data.createdAt.toDate) {  
+      time.textContent = data.createdAt.toDate().toLocaleTimeString(  
+        "ar-SA", { hour: "2-digit", minute: "2-digit" }  
+      );  
+    }  
+  
+    const text = document.createElement("div");  
+    text.className = "message-text";  
+    text.textContent = data.text || "";  
+  
+    head.append(sender, time);  
+    card.append(head, text);  
+    messages.append(card);  
+  });  
+  
+  messages.scrollTop = messages.scrollHeight;  
+}  
+  
+async function startApp() {  
+  try {  
+    await signInAnonymously(auth);  
+  
+    const messagesQuery = query(  
+      collection(db, "messages"),  
+      orderBy("createdAt", "asc")  
+    );  
+  
+    stopListening = onSnapshot(messagesQuery, (snapshot) => {  
+      displayMessages(snapshot);  
+      connected = true;  
+      enterButton.disabled = false;  
+      enterButton.textContent = "دخول الغرفة 💜";  
+      showStatus("اتصال قاعدة البيانات جاهز.");  
+    }, (error) => {  
+      console.error(error);  
+      showStatus("تعذّر تحميل الرسائل. تأكد من قواعد Firestore.");  
+    });  
+  } catch (error) {  
+    console.error(error);  
+    enterButton.disabled = true;  
+    enterButton.textContent = "تعذّر الاتصال";  
+    showStatus(  
+      "لم نتمكن من الاتصال. تأكد من تفعيل Anonymous في Authentication ونشر قواعد Firestore."  
+    );  
+  }  
+}  
+  
+enterButton.addEventListener("click", () => {  
+  const name = nicknameInput.value.trim();  
+  
+  if (!name) {  
+    showStatus("اكتب اسمًا مستعارًا أولًا.");  
+    nicknameInput.focus();  
+    return;  
+  }  
+  
+  if (!connected) {  
+    showStatus("انتظر حتى يكتمل الاتصال.");  
+    return;  
+  }  
+  
+  currentNickname = name.slice(0, 24);  
+  welcomeName.textContent = "أهلًا، " + currentNickname + " 💜";  
+  welcome.hidden = true;  
+  chat.hidden = false;  
+  messageInput.focus();  
+});  
+  
+chatForm.addEventListener("submit", async (event) => {  
+  event.preventDefault();  
+  
+  const text = messageInput.value.trim();  
+  
+  if (!text || !currentNickname || !auth.currentUser) return;  
+  
+  sendButton.disabled = true;  
+  showChatStatus("جارٍ إرسال الرسالة...");  
+  
+  try {  
+    await addDoc(collection(db, "messages"), {  
+      sender: currentNickname,  
+      text: text.slice(0, 1000),  
+      createdAt: serverTimestamp()  
+    });  
+  
+    messageInput.value = "";  
+    showChatStatus("تم إرسال الرسالة.");  
+    messageInput.focus();  
+  } catch (error) {  
+    console.error(error);  
+    showChatStatus("لم تُرسل الرسالة. تأكد من نشر قواعد Firestore.");  
+  } finally {  
+    sendButton.disabled = false;  
+  }  
+});  
+  
+backButton.addEventListener("click", () => {  
+  currentNickname = "";  
+  chat.hidden = true;  
+  welcome.hidden = false;  
+  nicknameInput.focus();  
+});  
+  
+startApp();  
+</script>  </body>  
+</html>  
