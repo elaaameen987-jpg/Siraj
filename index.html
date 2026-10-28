@@ -1,148 +1,1149 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>سِراج - الشات العربي الفخم</title>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Tajawal', sans-serif;
-        }
-        body {
-            background-color: #160e26;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .chat-container {
-            width: 100%;
-            max-width: 850px;
-            height: 100%;
-            max-height: 88vh;
-            background: #ffffff;
-            border-radius: 16px;
-            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.4);
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            border: 2px solid #d4af37;
-            position: relative;
-        }
-        
-        /* الهيدر العلوي */
-        .chat-header {
-            background: linear-gradient(135deg, #2c1b4d, #3f276b);
-            color: #d4af37;
-            padding: 18px 25px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 2px solid #d4af37;
-        }
-        .chat-header h2 {
-            font-size: 20px;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .user-badge {
-            background: rgba(212, 175, 55, 0.15);
-            color: #d4af37;
-            border: 1px solid #d4af37;
-            padding: 5px 14px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 600;
-        }
-        
-        /* محتوى الشات */
-        .chat-body {
-            display: flex;
-            flex: 1;
-            overflow: hidden;
-        }
-        .chat-messages-area {
-            flex: 1;
-            padding: 20px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            background: #faf8fc;
-        }
-        
-        .message-card {
-            background: #ffffff;
-            padding: 12px 18px;
-            border-radius: 12px;
-            border: 1px solid #e6dff2;
-            max-width: 75%;
-            box-shadow: 0 2px 5px rgba(44, 27, 77, 0.04);
-        }
-        .message-card .username {
-            font-weight: 700;
-            color: #5c3596;
-            font-size: 13px;
-            margin-bottom: 4px;
-        }
-        .message-card .text {
-            color: #2d2640;
-            font-size: 15px;
-            line-height: 1.5;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#11101a">
+<meta name="description" content="سِراج | مساحتك، حكايتك، وعالمك.">
+<title>سِراج | SIRAJ</title>
 
-        /* قائمة المتواجدين الجانبية */
-        .online-sidebar {
-            width: 210px;
-            background: #f4f0fa;
-            border-right: 1px solid #e6dff2;
-            padding: 15px;
-            display: flex;
-            flex-direction: column;
-        }
-        .online-sidebar h4 {
-            font-size: 14px;
-            color: #5c3596;
-            margin-bottom: 12px;
-            border-bottom: 2px solid #d4af37;
-            padding-bottom: 5px;
-            font-weight: 700;
-        }
-        .online-user {
-            font-size: 14px;
-            color: #3b2d54;
-            padding: 6px 0;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .dot {
-            width: 8px;
-            height: 8px;
-            background: #2ed573;
-            border-radius: 50%;
-        }
+<style>
+:root {
+  --bg: #11101a;
+  --panel: #191824;
+  --panel-2: #211f2e;
+  --panel-3: #292638;
+  --border: #343143;
+  --gold: #e7c779;
+  --gold-soft: #f4dfaa;
+  --text: #f5f2fa;
+  --muted: #a7a2b8;
+  --green: #6dd6a3;
+  --danger: #ff929b;
+  --radius: 18px;
+}
 
-        /* خانة إرسال الرسائل */
-        .chat-input-area {
-            padding: 15px;
-            background: #ffffff;
-            border-top: 1px solid #e6dff2;
-            display: flex;
-            gap: 12px;
-        }
-        .chat-input-area input {
-            flex: 1;
-            padding: 12px 16px;
-            background: #fbf9fc;
-            border: 1px solid #d4c7ed;
-            color: #2d2640;
-            border-radius: 8px;
-            outline: none;
-            font-size
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Tahoma, Arial, sans-serif;
+  font-size: 14px;
+}
+
+button, input { font: inherit; }
+button { cursor: pointer; }
+button:disabled { opacity: .5; cursor: not-allowed; }
+
+button:focus-visible, input:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+button:focus:not(:focus-visible), input:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.app {
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+  min-height: 100vh;
+  max-width: 1700px;
+  margin: auto;
+}
+
+.sidebar {
+  background: #171521;
+  border-left: 1px solid var(--border);
+  padding: 25px 17px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 4px 7px;
+}
+
+.brand-mark {
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  border-radius: 15px;
+  background: linear-gradient(145deg, #f0d794, #b58b42);
+  color: #21182c;
+  font-size: 25px;
+  box-shadow: 0 5px 22px #d5b46620;
+}
+
+.brand h1 {
+  font-size: 21px;
+  letter-spacing: .5px;
+  margin: 0 0 5px;
+}
+
+.brand p {
+  color: var(--muted);
+  margin: 0;
+  font-size: 11px;
+}
+
+.section-label {
+  color: #777187;
+  font-size: 11px;
+  padding: 0 9px;
+  margin-bottom: 12px;
+  letter-spacing: .4px;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 12px;
+  border-radius: 12px;
+  color: var(--muted);
+  margin-bottom: 5px;
+}
+
+.nav-item.active {
+  color: var(--gold-soft);
+  background: #e7c77912;
+  border: 1px solid #e7c77920;
+}
+
+.nav-icon {
+  width: 22px;
+  text-align: center;
+  font-size: 18px;
+}
+
+.room-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 14px;
+}
+
+.room-card-title {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-weight: bold;
+  margin-bottom: 9px;
+}
+
+.room-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 10px #6dd6a350;
+}
+
+.room-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.9;
+}
+
+.sidebar-bottom {
+  margin-top: auto;
+}
+
+.privacy-card {
+  background: #e7c77909;
+  border: 1px solid #e7c77920;
+  border-radius: 14px;
+  padding: 14px;
+  line-height: 1.9;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.privacy-card strong {
+  display: block;
+  color: var(--gold-soft);
+  margin-bottom: 5px;
+}
+
+.main {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.topbar {
+  height: 82px;
+  border-bottom: 1px solid var(--border);
+  padding: 0 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  background: #11101acc;
+}
+
+.topbar-title {
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.topbar-subtitle {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 7px;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.avatar {
+  width: 39px;
+  height: 39px;
+  border-radius: 13px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  background: linear-gradient(145deg, #453453, #282238);
+  border: 1px solid #51415e;
+  color: var(--gold-soft);
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.profile-name {
+  max-width: 140px;
+  overflow-wrap: anywhere;
+  font-weight: bold;
+}
+
+.profile-caption {
+  color: var(--muted);
+  font-size: 11px;
+  margin-top: 5px;
+}
+
+.content {
+  width: 100%;
+  max-width: 1050px;
+  margin: 0 auto;
+  padding: 26px 30px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+.welcome-banner {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(115deg, #292139, #1c1928 70%);
+  border: 1px solid #40334d;
+  border-radius: 20px;
+  padding: 23px 25px;
+  margin-bottom: 20px;
+}
+
+.welcome-banner::after {
+  content: "✦";
+  position: absolute;
+  left: 24px;
+  top: 4px;
+  font-size: 78px;
+  color: #e7c77912;
+  pointer-events: none;
+}
+
+.eyebrow {
+  color: var(--gold);
+  font-size: 11px;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+
+.welcome-banner h2 {
+  margin: 0 0 10px;
+  font-size: 22px;
+}
+
+.welcome-banner p {
+  margin: 0;
+  color: #b9b1c9;
+  line-height: 1.9;
+  font-size: 13px;
+}
+
+.chat-card {
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: var(--panel);
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 370px;
+  overflow: hidden;
+}
+
+.chat-heading {
+  padding: 17px 21px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.chat-heading h2 {
+  margin: 0 0 7px;
+  font-size: 15px;
+}
+
+.chat-heading p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.live-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 10px;
+  background: #6dd6a30c;
+  color: var(--green);
+  border: 1px solid #6dd6a320;
+  border-radius: 20px;
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.live-badge.offline {
+  color: var(--danger);
+  background: #ff929b0c;
+  border-color: #ff929b25;
+}
+
+.live-badge .room-dot {
+  width: 6px;
+  height: 6px;
+}
+
+#messages {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  flex: 1;
+  min-height: 240px;
+  max-height: 490px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scroll-behavior: smooth;
+}
+
+.message {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  max-width: 88%;
+  align-self: flex-start;
+}
+
+.message-avatar {
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: #342b43;
+  color: var(--gold-soft);
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.message-body { min-width: 0; }
+
+.message-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 9px;
+  margin: 2px 0 7px;
+}
+
+.sender {
+  color: var(--gold-soft);
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.time {
+  color: #817a91;
+  font-size: 10px;
+}
+
+.message-bubble {
+  background: var(--panel-2);
+  border: 1px solid #383346;
+  padding: 12px 14px;
+  border-radius: 4px 14px 14px 14px;
+  line-height: 1.9;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+  color: #ece7f3;
+}
+
+.message.mine {
+  align-self: flex-end;
+  flex-direction: row-reverse;
+}
+
+.message.mine .message-avatar {
+  background: #473a29;
+  color: var(--gold-soft);
+}
+
+.message.mine .message-bubble {
+  background: #382b40;
+  border-color: #59405b;
+  border-radius: 14px 4px 14px 14px;
+}
+
+.message.mine .message-head { justify-content: flex-start; }
+
+.date-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #827b91;
+  font-size: 11px;
+  margin: 4px 0;
+}
+
+.date-divider::before, .date-divider::after {
+  content: "";
+  height: 1px;
+  background: var(--border);
+  flex: 1;
+}
+
+.empty-state {
+  margin: auto;
+  text-align: center;
+  padding: 25px 10px;
+  color: var(--muted);
+  line-height: 2;
+}
+
+.empty-icon {
+  font-size: 34px;
+  margin-bottom: 12px;
+}
+
+.empty-state strong {
+  display: block;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+.composer-wrap {
+  padding: 15px 18px 17px;
+  border-top: 1px solid var(--border);
+  background: #171521;
+}
+
+.composer-hint {
+  color: var(--muted);
+  font-size: 11px;
+  margin: 0 3px 11px;
+  line-height: 1.8;
+}
+
+#chatForm {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#messageInput {
+  width: 100%;
+  min-width: 0;
+  background: #211f2e;
+  color: var(--text);
+  border: 1px solid #3a3549;
+  border-radius: 13px;
+  padding: 14px;
+  outline: none;
+}
+
+#messageInput::placeholder, input::placeholder {
+  color: #777187;
+}
+
+#messageInput:focus {
+  border-color: #a88b50;
+}
+
+.send-button {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px 19px;
+  border: 1px solid #f1d99b;
+  border-radius: 13px;
+  background: linear-gradient(135deg, #f0d99b, #d4ad60);
+  color: #251a2d;
+  font-weight: bold;
+  transition: transform .15s, opacity .15s;
+}
+
+.send-button:not(:disabled):active { transform: scale(.97); }
+
+.status-line {
+  color: var(--muted);
+  font-size: 11px;
+  margin: 11px 3px 0;
+  min-height: 17px;
+  line-height: 1.8;
+}
+
+.status-line.error { color: var(--danger); }
+.status-line.success { color: var(--green); }
+
+.footer {
+  color: #777187;
+  font-size: 11px;
+  text-align: center;
+  padding: 18px 10px 4px;
+}
+
+/* شاشة الدخول */
+.modal-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  background: #0c0b13e8;
+  backdrop-filter: blur(8px);
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.modal-layer[hidden] { display: none !important; }
+
+.login-card {
+  width: 100%;
+  max-width: 410px;
+  background: #1b1927;
+  border: 1px solid #41354f;
+  border-radius: 23px;
+  padding: 29px;
+  box-shadow: 0 25px 90px #0007;
+}
+
+.login-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.login-brand .brand-mark {
+  width: 62px;
+  height: 62px;
+  font-size: 32px;
+  margin-bottom: 15px;
+}
+
+.login-brand h2 {
+  font-size: 26px;
+  margin: 0 0 8px;
+}
+
+.login-brand p {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.9;
+  margin: 0;
+}
+
+.login-card label {
+  display: block;
+  margin: 18px 0 9px;
+  color: #ded7eb;
+  font-size: 12px;
+}
+
+.login-card input {
+  width: 100%;
+  background: #12111c;
+  color: var(--text);
+  border: 1px solid #40384f;
+  border-radius: 12px;
+  padding: 14px;
+  outline: none;
+}
+
+.login-card input:focus { border-color: var(--gold); }
+
+.primary-button {
+  width: 100%;
+  padding: 14px;
+  margin-top: 15px;
+  border: 0;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #f0d99b, #d4ad60);
+  color: #251a2d;
+  font-weight: bold;
+}
+
+.login-note {
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.9;
+  margin-top: 18px;
+  text-align: center;
+}
+
+[hidden] { display: none !important; }
+
+@media (min-width: 1100px) {
+  .content { padding-top: 32px; }
+  #messages { max-height: 550px; }
+}
+
+@media (max-width: 760px) {
+  .app { grid-template-columns: 1fr; }
+
+  .sidebar { display: none; }
+
+  .topbar {
+    height: 70px;
+    padding: 0 17px;
+  }
+
+  .topbar-title { font-size: 15px; }
+  .topbar-subtitle { font-size: 10px; }
+  .profile-caption { font-size: 10px; }
+
+  .content { padding: 17px 12px; }
+
+  .welcome-banner {
+    padding: 19px;
+    border-radius: 16px;
+    margin-bottom: 14px;
+  }
+
+  .welcome-banner h2 { font-size: 19px; }
+  .welcome-banner p { font-size: 12px; }
+
+  .chat-card { border-radius: 16px; }
+
+  .chat-heading { padding: 14px; }
+  #messages { padding: 15px 12px; max-height: 55vh; }
+  .message { max-width: 95%; }
+
+  .composer-wrap { padding: 12px; }
+  #chatForm { gap: 7px; }
+  #messageInput { padding: 12px; font-size: 13px; }
+  .send-button { padding: 12px 13px; }
+  .send-label { display: none; }
+
+  .footer { padding-bottom: 12px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    transition: none !important;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark">✦</div>
+      <div>
+        <h1>سِراج</h1>
+        <p>SIRAJ · مساحة تجمعنا</p>
+      </div>
+    </div>
+
+    <section>
+      <div class="section-label">القائمة الرئيسية</div>
+      <div class="nav-item active">
+        <span class="nav-icon">◉</span>
+        <span>المحادثات</span>
+      </div>
+      <div class="nav-item">
+        <span class="nav-icon">◇</span>
+        <span>مساحتك الخاصة</span>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-label">غرفك</div>
+      <div class="room-card">
+        <div class="room-card-title">
+          <span class="room-dot"></span>
+          <span>غرفة السوالف</span>
+        </div>
+        <p>مكان يجمع الأحاديث والأفكار في مساحة واحدة.</p>
+      </div>
+    </section>
+
+    <div class="sidebar-bottom">
+      <div class="privacy-card">
+        <strong>✧ مساحتك، حكايتك، وعالمك.</strong>
+        شارك أفكارك باحترام، وحافظ على خصوصيتك ولا تنشر بياناتك الشخصية.
+      </div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div>
+        <div class="topbar-title">مساحة سِراج</div>
+        <div class="topbar-subtitle">مكانك للحديث والتواصل</div>
+      </div>
+
+      <div class="profile">
+        <div class="avatar" id="profileAvatar">س</div>
+        <div>
+          <div class="profile-name" id="profileName">زائر سِراج</div>
+          <div class="profile-caption">عضو في سِراج</div>
+        </div>
+      </div>
+    </header>
+
+    <div class="content">
+      <section class="welcome-banner">
+        <div class="eyebrow">أَهْلًا بِكَ فِي سِرَاج</div>
+        <h2 id="greeting">هنا تبدأ حكايتك ✨</h2>
+        <p>مساحة تجمع الكلمات والأفكار، وتمنح كل حكاية مكانًا لتُروى.</p>
+      </section>
+
+      <section class="chat-card">
+        <header class="chat-heading">
+          <div>
+            <h2>🌙 غرفة السوالف</h2>
+            <p>تبادل الحديث مع أعضاء سِراج</p>
+          </div>
+          <div class="live-badge offline" id="connectionBadge">
+            <span class="room-dot"></span>
+            <span id="connectionText">جارٍ الاتصال</span>
+          </div>
+        </header>
+
+        <div id="messages" aria-live="polite" aria-relevant="additions text">
+          <div class="empty-state">
+            <div class="empty-icon">✦</div>
+            <strong>مرحبًا بك في سِراج</strong>
+            <span>جارٍ تحميل الرسائل...</span>
+          </div>
+        </div>
+
+        <div class="composer-wrap">
+          <p class="composer-hint">تحدّث بلطف، واحترم خصوصية الآخرين.</p>
+
+          <form id="chatForm">
+            <input
+              id="messageInput"
+              maxlength="1000"
+              placeholder="اكتب رسالتك هنا..."
+              autocomplete="off"
+              aria-label="نص الرسالة"
+              required
+              disabled
+            >
+            <button class="send-button" id="sendButton" type="submit" disabled>
+              <span>➤</span>
+              <span class="send-label">إرسال</span>
+            </button>
+          </form>
+
+          <p id="chatStatus" class="status-line" role="status">
+            جارٍ تهيئة الاتصال...
+          </p>
+        </div>
+      </section>
+
+      <footer class="footer">
+        سِراج | SIRAJ — مساحتك، حكايتك، وعالمك. 💜
+      </footer>
+    </div>
+  </main>
+</div>
+
+<div class="modal-layer" id="loginLayer">
+  <section class="login-card">
+    <div class="login-brand">
+      <div class="brand-mark">✦</div>
+      <h2>أهلًا بك في سِراج</h2>
+      <p>مساحتك، حكايتك، وعالمك.<br>اختر اسمًا مستعارًا وابدأ حكايتك.</p>
+    </div>
+
+    <form id="loginForm">
+      <label for="nickname">الاسم المستعار</label>
+      <input
+        id="nickname"
+        maxlength="24"
+        placeholder="مثال: نجمة الليل"
+        autocomplete="nickname"
+        required
+      >
+      <button class="primary-button" id="enterButton" type="submit" disabled>
+        جارٍ الاتصال...
+      </button>
+    </form>
+
+    <p class="status-line" id="loginStatus" role="status">
+      جارٍ الاتصال بقاعدة البيانات...
+    </p>
+
+    <p class="login-note">
+      لا تستخدم اسمك الكامل أو معلوماتك الشخصية.
+      الاسم المستعار لا يعني أن رسائلك مجهولة للجميع.
+    </p>
+  </section>
+</div>
+
+<script type="module">
+import { initializeApp } from
+  "https://www.gstatic.com/firebasejs/13.1.0/firebase-app.js";
+
+import { getAuth, signInAnonymously } from
+  "https://www.gstatic.com/firebasejs/13.1.0/firebase-auth.js";
+
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  serverTimestamp,
+  query,
+  orderBy,
+  onSnapshot
+} from "https://www.gstatic.com/firebasejs/13.1.0/firebase-firestore.js";
+
+// إعدادات مشروع سِراج الحالي
+const firebaseConfig = {
+  apiKey: "AIzaSyDQUWD0Rq3QkMRvZ0NwbkM9ifKG8hH7tTA",
+  authDomain: "siraj-7c46f.firebaseapp.com",
+  projectId: "siraj-7c46f",
+  storageBucket: "siraj-7c46f.firebasestorage.app",
+  messagingSenderId: "959478086475",
+  appId: "1:959478086475:web:7a1f1d6467e991213c06ce"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+const $ = (id) => document.getElementById(id);
+
+const messagesEl = $("messages");
+const loginLayer = $("loginLayer");
+const loginForm = $("loginForm");
+const nicknameInput = $("nickname");
+const enterButton = $("enterButton");
+const loginStatus = $("loginStatus");
+const chatForm = $("chatForm");
+const messageInput = $("messageInput");
+const sendButton = $("sendButton");
+const chatStatus = $("chatStatus");
+const connectionBadge = $("connectionBadge");
+const connectionText = $("connectionText");
+
+let currentNickname = "";
+let connected = false;
+let stopListening = null;
+let sending = false;
+let previousMessageIds = new Set();
+
+function setStatus(element, message, type = "") {
+  element.textContent = message;
+  element.className = element.id === "chatStatus" ||
+    element.id === "loginStatus"
+    ? "status-line" + (type ? " " + type : "")
+    : element.className;
+}
+
+function setConnection(isConnected, message) {
+  connectionBadge.classList.toggle("offline", !isConnected);
+  connectionText.textContent = message;
+}
+
+function setConnectedState(isConnected) {
+  connected = isConnected;
+  enterButton.disabled = !isConnected;
+  enterButton.textContent = isConnected
+    ? "دخول سِراج ✦"
+    : "جارٍ الاتصال...";
+
+  messageInput.disabled = !isConnected;
+  sendButton.disabled = !isConnected || sending;
+
+  if (isConnected) {
+    setConnection(true, "متصل");
+    setStatus(loginStatus, "اتصال قاعدة البيانات جاهز.", "success");
+    setStatus(chatStatus, "أنت متصل. أرسل رسالتك متى شئت.", "success");
+  }
+}
+
+function formatTime(timestamp) {
+  if (!timestamp || typeof timestamp.toDate !== "function") {
+    return "الآن";
+  }
+
+  return timestamp.toDate().toLocaleTimeString("ar-SA", {
+    hour: "2-digit",
+    minute: "2-digit"
+  });
+}
+
+function createMessage(item) {
+  const data = item.data();
+
+  const card = document.createElement("article");
+  card.className = "message";
+
+  const avatar = document.createElement("div");
+  avatar.className = "message-avatar";
+  avatar.textContent = (data.sender || "م").trim().charAt(0) || "م";
+  avatar.setAttribute("aria-hidden", "true");
+
+  const body = document.createElement("div");
+  body.className = "message-body";
+
+  const head = document.createElement("div");
+  head.className = "message-head";
+
+  const sender = document.createElement("span");
+  sender.className = "sender";
+  sender.textContent = data.sender || "مستخدم";
+
+  const time = document.createElement("time");
+  time.className = "time";
+  time.textContent = formatTime(data.createdAt);
+
+  const bubble = document.createElement("div");
+  bubble.className = "message-bubble";
+  bubble.textContent = data.text || "";
+
+  head.append(sender, time);
+  body.append(head, bubble);
+  card.append(avatar, body);
+
+  return card;
+}
+
+function displayMessages(snapshot) {
+  const fragment = document.createDocumentFragment();
+  const newIds = new Set();
+
+  if (snapshot.empty) {
+    const empty = document.createElement("div");
+    empty.className = "empty-state";
+
+    const icon = document.createElement("div");
+    icon.className = "empty-icon";
+    icon.textContent = "✦";
+
+    const title = document.createElement("strong");
+    title.textContent = "بداية حكاية جديدة";
+
+    const description = document.createElement("span");
+    description.textContent = "لا توجد رسائل بعد. كن أول من يبدأ الحديث.";
+
+    empty.append(icon, title, description);
+    fragment.append(empty);
+  } else {
+    snapshot.forEach((item) => {
+      newIds.add(item.id);
+      fragment.append(createMessage(item));
+    });
+  }
+
+  // لا نعيد بناء نافذة الرسائل إن لم تتغير هويّة الرسائل.
+  // هذا يحافظ على موضع التمرير عند وصول تحديثات Firestore.
+  const sameIds =
+    newIds.size === previousMessageIds.size &&
+    [...newIds].every((id) => previousMessageIds.has(id));
+
+  if (!sameIds) {
+    const nearBottom =
+      messagesEl.scrollHeight - messagesEl.scrollTop -
+      messagesEl.clientHeight < 100;
+
+    messagesEl.replaceChildren(fragment);
+
+    if (nearBottom || previousMessageIds.size === 0) {
+      messagesEl.scrollTop = messagesEl.scrollHeight;
+    }
+  } else {
+    // نحدّث الأوقات أو محتوى الرسائل إذا تغيّرت البيانات
+    // حتى لو بقيت معرّفات المستندات نفسها.
+    snapshot.forEach((item) => {
+      const oldMessage = [...messagesEl.querySelectorAll(".message")];
+      const index = snapshot.docs.findIndex((doc) => doc.id === item.id);
+      if (index < 0 || !oldMessage[index]) return;
+
+      const updated = createMessage(item);
+      oldMessage[index].replaceWith(updated);
+    });
+  }
+
+  previousMessageIds = newIds;
+}
+
+async function startApp() {
+  setConnection(false, "جارٍ الاتصال");
+  setStatus(loginStatus, "جارٍ الاتصال بقاعدة البيانات...");
+
+  try {
+    await signInAnonymously(auth);
+
+    const messagesQuery = query(
+      collection(db, "messages"),
+      orderBy("createdAt", "asc")
+    );
+
+    stopListening = onSnapshot(
+      messagesQuery,
+      (snapshot) => {
+        displayMessages(snapshot);
+        setConnectedState(true);
+      },
+      (error) => {
+        console.error("Firestore listener error:", error);
+        setConnection(false, "مشكلة في الاتصال");
+        setStatus(
+          loginStatus,
+          "تعذّر تحميل الرسائل. تحقق من قواعد Firestore واتصال الإنترنت."
+        );
+        setStatus(
+          chatStatus,
+          "فُقد الاتصال بالرسائل. تحقق من الإنترنت أو إعدادات Firebase.",
+          "error"
+        );
+        setConnectedState(false);
+      }
+    );
+  } catch (error) {
+    console.error("Firebase initialization error:", error);
+    setConnection(false, "غير متصل");
+    setConnectedState(false);
+    setStatus(
+      loginStatus,
+      "تعذّر الاتصال. تحقق من تفعيل Anonymous وإعدادات Firebase."
+    );
+    setStatus(
+      chatStatus,
+      "تعذّر الاتصال بقاعدة البيانات.",
+      "error"
+    );
+  }
+}
+
+loginForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  const name = nicknameInput.value.trim();
+
+  if (!name) {
+    setStatus(loginStatus, "اكتب اسمًا مستعارًا أولًا.", "error");
+    nicknameInput.focus();
+    return;
+  }
+
+  if (!connected) {
+    setStatus(loginStatus, "انتظر حتى يكتمل الاتصال.", "error");
+    return;
+  }
+
+  currentNickname = name.slice(0, 24);
+
+  $("profileName").textContent = currentNickname;
+  $("profileAvatar").textContent = currentNickname.charAt(0) || "س";
+  $("greeting").textContent = "أهلًا بك، " + currentNickname + " ✨";
+
+  loginLayer.hidden = true;
+  messageInput.focus();
+});
+
+chatForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+
+  const text = messageInput.value.trim();
+
+  if (!text || !currentNickname || !auth.currentUser || sending) {
+    return;
+  }
+
+  if (!connected) {
+    setStatus(chatStatus, "الاتصال غير جاهز. انتظر قليلًا.", "error");
+    return;
+  }
+
+  sending = true;
+  sendButton.disabled = true;
+  setStatus(chatStatus, "جارٍ إرسال الرسالة...");
+
+  try {
+    await addDoc(collection(db, "messages"), {
+      sender: currentNickname,
+      text: text.slice(0, 1000),
+      createdAt: serverTimestamp()
+    });
+
+    messageInput.value = "";
+    setStatus(chatStatus, "تم إرسال الرسالة بنجاح.", "success");
+    messageInput.focus();
+  } catch (error) {
+    console.error("Message send error:", error);
+    setStatus(
+      chatStatus,
+      "لم تُرسل الرسالة. تحقق من الاتصال وقواعد Firestore.",
+      "error"
+    );
+  } finally {
+    sending = false;
+    sendButton.disabled = !connected;
+  }
+});
+
+// إيقاف مستمع Firestore عند مغادرة الصفحة.
+window.addEventListener("pagehide", () => {
+  if (typeof stopListening === "function") {
+    stopListening();
+  }
+});
+
+startApp();
+</script>
+</body>
+</html>
